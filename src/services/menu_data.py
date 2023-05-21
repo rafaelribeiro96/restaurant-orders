@@ -11,7 +11,7 @@ class MenuData:
 
         obj = {}
 
-        for dish_info in csv_reader:
+        for dish_info in self.csv_reader:
             name, price, ingredient, amount = f_info
             if name not in obj:
                 dish = Dish(name, price)
