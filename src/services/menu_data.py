@@ -6,18 +6,18 @@ from models.ingredient import Ingredient
 # Req 3
 class MenuData:
     def __init__(self, source_path: str) -> None:
-        self.dishes = set()
         self.csv_reader = pd.read_csv(source_path).itertuples(index=False)
+        self.dishes = set()
 
         obj = {}
-
-        for dish_info in self.csv_reader:
-            if dish_info.name not in obj:
-                dish = Dish(dish_info.name, dish_info.price)
-                obj[dish_info.name] = dish
+        for get_info in self.csv_reader:
+            name, price, ingredient, amount = get_info
+            if name not in obj:
+                dish = Dish(name, price)
+                obj[name] = dish
                 self.dishes.add(dish)
-            ingredient_obj = Ingredient(dish_info.ingredient)
-            obj[dish_info.name].add_ingredient_dependency(ingredient_obj, dish_info.amount)
+            get_ingredients = Ingredient(ingredient)
+            obj[name].add_ingredient_dependency(get_ingredients, amount)
 
     def __len__(self):
         return self.__length
