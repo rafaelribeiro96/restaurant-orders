@@ -12,13 +12,12 @@ class MenuData:
         obj = {}
 
         for dish_info in self.csv_reader:
-            name, price, ingredient, amount = f_info
-            if name not in obj:
-                dish = Dish(name, price)
-                obj[name] = dish
+            if dish_info.name not in obj:
+                dish = Dish(dish_info.name, dish_info.price)
+                obj[dish_info.name] = dish
                 self.dishes.add(dish)
-            ingredient_obj = Ingredient(ingredient_name)
-            obj[name].add_ingredient_dependency(ingredient_obj, amount)
+            ingredient_obj = Ingredient(dish_info.ingredient)
+            obj[dish_info.name].add_ingredient_dependency(ingredient_obj, dish_info.amount)
 
     def __len__(self):
-        return len(self.dishes)
+        return self.__length
